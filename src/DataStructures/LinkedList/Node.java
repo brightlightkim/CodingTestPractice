@@ -58,6 +58,19 @@ public class Node {
         return head;
     }
 
+    public void deleteDups(Node n) {
+        HashSet<Integer> set = new HashSet<>();
+        Node previous = null;
+        while (n!=null){
+            if (set.contains(n.data)){
+                previous.next = n.next;
+            } else {
+                set.add(n.data);
+                previous = n;
+            }
+        }
+    }
+
     public void printNodes(){
         Node n = this;
         while(n.next!=null){

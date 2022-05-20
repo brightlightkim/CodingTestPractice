@@ -11,11 +11,11 @@ public class Node {
         data = value;
     }
 
-    void insertNodeAtTail(int value) {
+    public void insertNodeAtTail(int value) {
         Node newNode = new Node(value);
         Node n = this;
         while (n.next != null) {
-            n = n;
+            n = n.next;
         }
         n.next = newNode;
     }
@@ -41,11 +41,29 @@ public class Node {
         Set<Integer> set = new HashSet<>();
         set.add(n.data);
 
-        while(n.next.next != null){
-            if (!set.add(n.next.data)){
+        while(n.next != null){
+            if (set.contains(n.next.data)){
                 // It means it already exists.
+                if (n.next.next != null) {
+                    n.next = n.next.next;
+                } else {
+                    n.next = null;
+                    break;
+                }
+            } else {
+                set.add(n.next.data);
             }
+            n = n.next;
         }
         return head;
+    }
+
+    public void printNodes(){
+        Node n = this;
+        while(n.next!=null){
+            System.out.println(n.data);
+            n = n.next;
+        }
+        System.out.println(n.data);
     }
 }

@@ -22,12 +22,12 @@ public class Node {
 
     public Node deleteNode(Node head, int value) {
         Node n = head;
-        if (n.data==value){
+        if (n.data == value) {
             return head.next;
         }
 
-        while (n.next.next != null){
-            if (n.next.data == value){
+        while (n.next.next != null) {
+            if (n.next.data == value) {
                 n.next = n.next.next;
                 return head; //head doesn't change
             }
@@ -36,13 +36,13 @@ public class Node {
         return head;
     }
 
-    public Node deleteDuplicatedNodes(Node head){
+    public Node deleteDuplicatedNodes(Node head) {
         Node n = head;
         Set<Integer> set = new HashSet<>();
         set.add(n.data);
 
-        while(n.next != null){
-            if (set.contains(n.next.data)){
+        while (n.next != null) {
+            if (set.contains(n.next.data)) {
                 // It means it already exists.
                 if (n.next.next != null) {
                     n.next = n.next.next;
@@ -61,8 +61,8 @@ public class Node {
     public void deleteDups(Node n) {
         HashSet<Integer> set = new HashSet<>();
         Node previous = null;
-        while (n!=null){
-            if (set.contains(n.data)){
+        while (n != null) {
+            if (set.contains(n.data)) {
                 previous.next = n.next;
             } else {
                 set.add(n.data);
@@ -71,20 +71,20 @@ public class Node {
         }
     }
 
-    public void printNodes(){
+    public void printNodes() {
         Node n = this;
-        while(n.next!=null){
+        while (n.next != null) {
             System.out.println(n.data);
             n = n.next;
         }
         System.out.println(n.data);
     }
 
-    public Node returnKthToLast(Node node, int k){
+    public Node returnKthToLast(Node node, int k) {
         Node n = node;
         int i = 0;
-        while (n.next != null){
-            if (i == k-1){
+        while (n.next != null) {
+            if (i == k - 1) {
                 break;
             }
             i++;
@@ -98,7 +98,7 @@ public class Node {
             return 0;
         }
         int index = printKthToLast(head.next, k) + 1;
-        if (index == k){
+        if (index == k) {
             System.out.println(k + "th to last node is " + head.data);
         }
         return index;
@@ -108,20 +108,44 @@ public class Node {
         public int value = 0;
     }
 
-    public Node kthToLast(Node head, int k){
+    public Node kthToLast(Node head, int k) {
         Index idx = new Index();
         return kthToLast(head, k, idx);
     }
 
-    public Node kthToLast(Node head, int k, Index idx){
-        if (head == null){
+    public Node kthToLast(Node head, int k, Index idx) {
+        if (head == null) {
             return null;
         }
         Node node = kthToLast(head.next, k, idx);
         idx.value = idx.value + 1;
-        if (idx.value == k){
+        if (idx.value == k) {
             return head;
         }
         return node;
+    }
+
+    public void deleteMiddleNode(Node node) {
+        Node fastNode = node;
+        Node slowNode = node;
+        Node beforeNode = null;
+        while (fastNode.next.next != null) {
+            fastNode = fastNode.next.next;
+            beforeNode = slowNode;
+            slowNode = slowNode.next;
+        }
+        if (beforeNode != null) {
+            beforeNode.next = beforeNode.next.next;
+        }
+    }
+
+    boolean deleteNode(Node n) {
+        if (n == null || n.next == null) {
+            return false;
+        }
+        Node next = n.next;
+        n.data = next.data;
+        n.next = next.next;
+        return true;
     }
 }

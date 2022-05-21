@@ -12,7 +12,7 @@ public class Main {
         node.insertNodeAtTail(3);
         node.insertNodeAtTail(2);
 
-        node = node.deleteDuplicatedNodes(node);
+        node = node.returnKthToLast(node, 2);
 
         node.printNodes();
     }

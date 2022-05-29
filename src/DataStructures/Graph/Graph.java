@@ -1,4 +1,4 @@
-package DataStructures;
+package DataStructures.Graph;
 
 public class Graph {
     public Node[] nodes;
